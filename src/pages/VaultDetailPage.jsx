@@ -1,5 +1,5 @@
-import { Link, useNavigate, useParams } from 'react-router-dom';
-import { ArrowLeft, ExternalLink, BookOpen, FileText } from 'lucide-react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { ArrowLeft, BookOpen, FileText } from 'lucide-react';
 import { useAuth } from '../hooks/useAuth';
 import { useVaults } from '../hooks/useVaults';
 

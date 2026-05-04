@@ -3,6 +3,10 @@ import { getFromStorage, setToStorage, removeFromStorage } from '../utils/storag
 
 const AuthContext = createContext(null);
 
+const createId = (prefix) => `${prefix}-${Date.now()}`;
+const createToken = () => `token-${Date.now()}`;
+const createTimestamp = () => new Date().toISOString();
+
 export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(() => getFromStorage('currentUser'));
 
@@ -14,11 +18,11 @@ export const AuthProvider = ({ children }) => {
     }
 
     const newUser = {
-      id: `user-${Date.now()}`,
+      id: createId('user'),
       username,
       email,
       password,
-      createdAt: new Date().toISOString()
+      createdAt: createTimestamp()
     };
 
     users.push(newUser);
@@ -28,7 +32,7 @@ export const AuthProvider = ({ children }) => {
       id: newUser.id,
       username: newUser.username,
       email: newUser.email,
-      token: `token-${Date.now()}`,
+      token: createToken(),
       isLoggedIn: true
     };
     setToStorage('currentUser', session);
@@ -49,7 +53,7 @@ export const AuthProvider = ({ children }) => {
       id: user.id,
       username: user.username,
       email: user.email,
-      token: `token-${Date.now()}`,
+      token: createToken(),
       isLoggedIn: true
     };
     setToStorage('currentUser', session);
